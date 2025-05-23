@@ -1,5 +1,6 @@
 package com.tanaka.tanaka;
 //import javax.persistence.*;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,20 +10,26 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @Entity
+@Schema(description = "Representa un producto en el inventario del maestro Tanaka")
 public class ProductoOtaku {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador único del producto", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
     @NotBlank(message = "El nombre es obligatorio")
+    @Schema(description = "Nombre del producto. Este campo es obligatorio", example = "Figura de Goku")
     private String nombre;
     @NotNull(message = "la categoria es obligatoria")
+    @Schema(description = "Categoría a la que pertenece el producto", example = "Figura")
     private String categoria;
     @NotNull(message = "El precio es obligatorio")
     @Positive(message = "El precio debe ser positivo")
+    @Schema(description = "Precio del producto, debe ser un número positivo", example = "25.99")
     private Double precio;
     @NotNull(message = "Debes tener al menos una unidad")
     @Positive(message = "Debes tener al menos una unidad")
+    @Schema(description = "Cantidad disponible en stock", example = "10")
     private Integer stock;
 
     // Constructor vacío (necesario para JPA)
