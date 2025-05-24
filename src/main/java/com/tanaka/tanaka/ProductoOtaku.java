@@ -1,5 +1,4 @@
 package com.tanaka.tanaka;
-//import javax.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

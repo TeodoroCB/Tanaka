@@ -61,7 +61,13 @@ public class ProductoController {
     public ProductoOtaku create(@Valid @RequestBody ProductoOtaku producto) {
         return repository.save(producto);
     }
-
+    /**
+     * Actualiza los detalles de un producto existente identificado por su ID.
+     *
+     * @param id Identificador único del producto que se desea actualizar.
+     * @param producto Datos nuevos del producto que reemplazarán los existentes.
+     * @return El producto actualizado si existe, o un código 404 si no se encuentra.
+     */
     @Operation(
             summary = "Actualizar un producto",
             description = "Este endpoint permite actualizar la información de un producto existente identificado por su ID. Se requiere que los datos enviados cumplan con las validaciones predefinidas, como el nombre obligatorio y el precio positivo."
@@ -78,7 +84,12 @@ public class ProductoController {
             return ResponseEntity.ok(repository.save(producto));
         }).orElse(ResponseEntity.notFound().build());
     }
-
+    /**
+     * Elimina un producto del inventario según su ID.
+     *
+     * @param id Identificador único del producto a eliminar.
+     * @return Un código 204 si la eliminación fue exitosa, o 404 si el producto no existe.
+     */
     @Operation(
             summary = "Eliminar un producto",
             description = "Este endpoint elimina un producto del inventario basado en su ID. Si el producto no existe, se devuelve un error 404 indicando que no se encontró."
