@@ -44,7 +44,7 @@ public class ProductoOtaku {
         this.stock = stock;
     }
 
-    // Getters y Setters
+
     public Long getId() {
         return id;
     }

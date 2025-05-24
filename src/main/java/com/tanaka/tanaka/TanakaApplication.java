@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @OpenAPIDefinition(
         info = @Info(
                 title = "Inventario Otaku API",
-                version = "1.0",
+                version = "3.0",
                 description = "API para gestionar el inventario de productos de Maestro Tanaka"
         )
 )

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Productos Otaku</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/arcade-classic');
+
+        body {
+            background: url("img/neon.jpg");
+            font-family: 'ArcadeClassic', sans-serif;
+        }
+
+        .card {
+            background-color: #1a0933;
+            border-radius: 25px;
+        }
+
+
+        input {
+            border-radius: 0 15px 15px 0 !important;
+
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: none !important;
+            border: 1px solid #ccc !important;
+
+        }
+
+
+        button {
+            border-radius: 15px !important;
+            background-color: #07001e !important; /* Color base oscuro */
+            border: 0 !important;
+            box-shadow: 0 0 25px #510b67 !important;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+        }
+
+        button:hover {
+            background-color: #b917e8 !important; /* Rosa neón oscuro */
+            box-shadow: 0 0 25px #b917e8; /* Brillo más intenso */
+        }
+
+
+        header {
+
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            color: #ff00ff;
+            text-align: center;
+            padding: 2rem 0 1rem;
+            font-size: 2.5rem;
+            text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+        }
+
+        header h1 {
+            flex: 1 100%;
+            margin: 0 0 10px 0;
+            font-size: 3em;
+            text-align: center;
+            color: #b917e8;
+            text-shadow: 0 0 8px #9D00FF;
+            -webkit-text-stroke: 3px black;
+
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        li div {
+            border: none; /* Elimina los bordes */
+            background: transparent; /* Hace que el fondo sea el mismo que el contenedor */
+            padding: 5px; /* Espaciado para mejor apariencia */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        H2 {
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+<header>
+    <h1>Mangas akihabara</h1>
+</header>
+
+<div class="container" style="font-size: 2em">
+    <div class="d-flex flex-wrap justify-content-center">
+        <div class="row">
+            <div class="col-sm">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-body">
+                        <div class="mt-4">
+                            <h2>INCLUIR</h2>
+                            <form id="producto-form">
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre:</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoria" class="form-label">Categoria:</label>
+                                    <input type="text" id="categoria" name="categoria" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="precio" class="form-label">Precio:</label>
+                                    <input type="number" id="precio" name="precio" step="0.01" class="form-control"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="stock" class="form-label">Stock:</label>
+                                    <input type="number" id="stock" name="stock" class="form-control" required>
+                                </div>
+                                <div class="button-container">
+                                    <button type="submit" class="btn btn-primary">Añadir</button>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card border-primary mb-3" style="max-width: 60rem;">
+                    <div class="card-body" style="font-size: 0.7em">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Categoria</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody id="productos-list">
+                            <!-- Aquí se añadirán las filas dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm">
+                <div class="card border-primary mb-3" style="max-width: 20rem;" id="editar-producto-div">
+                    <div class="card-body">
+                        <div class="mt-4">
+                            <h2>Editar</h2>
+                            <form id="editar-producto-form">
+                                <input type="hidden" id="edit-id">
+                                <div class="mb-3">
+                                    <label for="edit-nombre" class="form-label">Nombre:</label>
+                                    <input type="text" id="edit-nombre" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edit-categoria" class="form-label">Categoria:</label>
+                                    <input type="text" id="edit-categoria" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edit-precio" class="form-label">Precio:</label>
+                                    <input type="number" id="edit-precio" class="form-control" step=".01" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edit-stock" class="form-label">Stock:</label>
+                                    <input type="number" id="edit-stock" class="form-control" required>
+                                </div>
+
+                                <div class="button-container">
+                                    <button type="submit" class="btn btn-success">Actualizar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    const API_URL = "/productos";
+
+    function fetchProductos() {
+        fetch(API_URL)
+            .then(response => response.json())
+            .then(data => {
+                const productosList = document.getElementById('productos-list');
+                productosList.innerHTML = ''; // Limpiar tabla
+
+                data.forEach(producto => {
+                    const tr = document.createElement('tr'); // Crear fila
+
+                    tr.innerHTML = `
+                    <td>${producto.id}</td>
+                    <td>${producto.nombre}</td>
+                    <td>${producto.categoria}</td>
+                    <td>¥${producto.precio}</td>
+                    <td>${producto.stock}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm mx-2" onclick="editarProducto(${producto.id}, '${producto.nombre}', '${producto.categoria}', ${producto.precio}, ${producto.stock})">Editar</button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${producto.id})">Eliminar</button>
+                    </td>
+                `;
+
+                    productosList.appendChild(tr); // Agregar fila a la tabla
+                });
+            })
+            .catch(error => console.error('Error al obtener los productos:', error));
+    }
+
+
+    // Ejecuta la función al cargar la página
+    window.onload = fetchProductos;
+
+    // Manejo del formulario para agregar productos
+    document.getElementById('producto-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const categoria = document.getElementById('categoria').value;
+        const precio = parseFloat(document.getElementById('precio').value);
+        const stock = parseInt(document.getElementById('stock').value, 10);
+
+        const producto = {nombre, categoria, precio, stock};
+
+        fetch(API_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(producto)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Producto creado correctamente.');
+                    document.getElementById('producto-form').reset();
+                    fetchProductos();
+                } else {
+                    return response.text().then(text => {
+                        throw new Error(text);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error al crear el producto:', error);
+                alert('Ocurrió un error al crear el producto: ' + error.message);
+            });
+    });
+
+    // Eliminar producto
+    function eliminarProducto(id) {
+        if (confirm("¿Seguro que quieres eliminar este producto?")) {
+            fetch(`${API_URL}/${id}`, {method: 'DELETE'})
+                .then(response => {
+                    if (response.ok) {
+                        alert("Producto eliminado correctamente.");
+                        fetchProductos();
+                    } else {
+                        return response.text().then(text => {
+                            throw new Error(text);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al eliminar el producto:', error);
+                    alert("Ocurrió un error al eliminar el producto: " + error.message);
+                });
+        }
+    }
+
+    // Preparar formulario de edición
+    function editarProducto(id, nombre, categoria, precio, stock) {
+        document.getElementById('edit-id').value = id;
+        document.getElementById('edit-nombre').value = nombre;
+        document.getElementById('edit-categoria').value = categoria;
+        document.getElementById('edit-precio').value = precio;
+        document.getElementById('edit-stock').value = stock;
+        document.getElementById('editar-producto-div').style.display = "block";
+    }
+
+    // Actualizar producto
+    document.getElementById('editar-producto-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const id = document.getElementById('edit-id').value;
+        const nombre = document.getElementById('edit-nombre').value;
+        const categoria = document.getElementById('edit-categoria').value;
+        const precio = parseFloat(document.getElementById('edit-precio').value);
+        const stock = parseInt(document.getElementById('edit-stock').value, 10);
+
+        const producto = {nombre, categoria, precio, stock};
+
+        fetch(`${API_URL}/${id}`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(producto)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Producto actualizado correctamente.");
+                    document.getElementById('editar-producto-form').reset();
+                    fetchProductos();
+                } else {
+                    return response.text().then(text => {
+                        throw new Error(text);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error al actualizar el producto:', error);
+                alert("Ocurrió un error al actualizar el producto: " + error.message);
+            });
+    });
+
+</script>
+</body>
+</html>
