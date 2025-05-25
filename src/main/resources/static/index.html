@@ -146,7 +146,7 @@
                             </tr>
                             </thead>
                             <tbody id="productos-list">
-                            <!-- Aquí se añadirán las filas dinámicamente -->
+
                             </tbody>
                         </table>
                     </div>
@@ -224,10 +224,10 @@
     }
 
 
-    // Ejecuta la función al cargar la página
+
     window.onload = fetchProductos;
 
-    // Manejo del formulario para agregar productos
+    // Formulario para agregar productos
     document.getElementById('producto-form').addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -281,7 +281,7 @@
         }
     }
 
-    // Preparar formulario de edición
+    // Formulario de edición
     function editarProducto(id, nombre, categoria, precio, stock) {
         document.getElementById('edit-id').value = id;
         document.getElementById('edit-nombre').value = nombre;

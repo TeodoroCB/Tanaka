@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DataLoader implements CommandLineRunner {
+public class DataLoader implements CommandLineRunner { //Esta implementacion significa que el metodo run se ejecutará automáticamente cuando la aplicación se inicie
 
     private final ProductoRepository repository;
 
@@ -12,10 +12,10 @@ public class DataLoader implements CommandLineRunner {
         this.repository = repository;
     }
 
-    @Override
-    public void run(String... args) {
-        repository.save(new ProductoOtaku(null, "Figura de Luffy", "Figura", 25.99, 10));
-        repository.save(new ProductoOtaku(null, "Manga de Naruto", "Manga", 15.50, 20));
-        repository.save(new ProductoOtaku(null, "Póster de One Piece", "Póster", 9.99, 30));
+    @Override //Para sustituir el metodo que viene con CommandLineRunner
+    public void run(String... args) { //Se introduce null en el Id porque se genera uno autoincrementable con GeneratedValue
+        repository.save(new ProductoOtaku(null, "Figura de Zoro", "Figura", 300.99, 25));
+        repository.save(new ProductoOtaku(null, "Manga de One piece", "Manga", 200.50, 50));
+        repository.save(new ProductoOtaku(null, "Poster de Luffy", "Poster", 100.00, 60));
     }
 }

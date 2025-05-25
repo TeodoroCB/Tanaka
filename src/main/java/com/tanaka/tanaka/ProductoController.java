@@ -9,34 +9,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/productos")
-public class ProductoController {
+@RestController  //Hace que los metodos devuelvan datos json en la respuesta http
+@RequestMapping("/productos") //Esta sera la ruta base para todos los endpoints
+public class ProductoController { //Esta clase define los endpoints para interactuar con los productos
 
     private final ProductoRepository repository;
 
     public ProductoController(ProductoRepository repository) {
         this.repository = repository;
+        //Esta dentro del constructor para que Spring cree una instancia y la inyecte en el constructor directamente sin hacer un new
     }
 
-    // GET /productos → Obtener todos los productos
+    // Para obtener todos los productos
     @Operation(
             summary = "Obtener todos los productos",
-            description = "Este endpoint recupera la lista completa de productos del inventario. Cada producto incluye información como nombre, categoría, precio y stock."
+            description = "Este endpoint recupera la lista completa de productos del inventario"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listado de productos obtenido correctamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno en el servidor")
+            @ApiResponse(responseCode = "500", description = "Error")
     })
     @GetMapping
     public List<ProductoOtaku> getAll() {
         return repository.findAll();
     }
 
-    // GET /productos/{id} → Obtener un producto por ID
+    // Para obtener un producto por ID
     @Operation(
             summary = "Obtener un producto por ID",
-            description = "Este endpoint devuelve los detalles de un producto en particular identificándolo por su ID."
+            description = "Este endpoint devuelve los detalles de un producto despues de obtener su id"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Producto encontrado"),
@@ -51,7 +52,7 @@ public class ProductoController {
 
     @Operation(
             summary = "Crear un nuevo producto",
-            description = "Crea un nuevo producto en el inventario. Se validan campos obligatorios como el nombre y se comprueba que el precio sea positivo."
+            description = "Crea un nuevo producto en el inventario. Se validan campos obligatorios como el nombre y se comprueba que el precio sea positivo"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Producto creado correctamente"),
@@ -60,17 +61,17 @@ public class ProductoController {
     @PostMapping
     public ProductoOtaku create(@Valid @RequestBody ProductoOtaku producto) {
         return repository.save(producto);
-    }
+    } //Recibe un producto en formato JSON, lo valida y lo almacena
     /**
-     * Actualiza los detalles de un producto existente identificado por su ID.
+     * Actualiza los detalles de un producto despues de buscar su id
      *
-     * @param id Identificador único del producto que se desea actualizar.
-     * @param producto Datos nuevos del producto que reemplazarán los existentes.
-     * @return El producto actualizado si existe, o un código 404 si no se encuentra.
+     * @param id Identificador del producto que se actualiza
+     * @param producto Datos nuevos del producto
+     * @return El producto actualizado o un código 404 si no lo encuentra
      */
     @Operation(
             summary = "Actualizar un producto",
-            description = "Este endpoint permite actualizar la información de un producto existente identificado por su ID. Se requiere que los datos enviados cumplan con las validaciones predefinidas, como el nombre obligatorio y el precio positivo."
+            description = "Este endpoint actualiza la información de un producto identificandolo por su ID."
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Producto actualizado correctamente"),
@@ -85,17 +86,17 @@ public class ProductoController {
         }).orElse(ResponseEntity.notFound().build());
     }
     /**
-     * Elimina un producto del inventario según su ID.
+     * Elimina un producto del inventario con el id
      *
-     * @param id Identificador único del producto a eliminar.
-     * @return Un código 204 si la eliminación fue exitosa, o 404 si el producto no existe.
+     * @param id Identificador del producto que se elimina
+     * @return Un código 204 si la eliminación fue exitosa o 404 si no
      */
     @Operation(
             summary = "Eliminar un producto",
-            description = "Este endpoint elimina un producto del inventario basado en su ID. Si el producto no existe, se devuelve un error 404 indicando que no se encontró."
+            description = "Este endpoint elimina un producto del inventario o se devuelve un error 404 si no esta en el listado"
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Producto eliminado exitosamente"),
+            @ApiResponse(responseCode = "204", description = "Producto eliminado"),
             @ApiResponse(responseCode = "404", description = "Producto no encontrado")
     })
     @DeleteMapping("/{id}")

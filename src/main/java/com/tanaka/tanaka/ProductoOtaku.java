@@ -8,13 +8,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-@Entity
-@Schema(description = "Representa un producto en el inventario del maestro Tanaka")
+@Entity //Indica que cada objeto de esta clase sera reconocido como una entidad con la que se permite realizar operaciones CRUD
+@Schema(description = "Representa un producto en el inventario de Tanaka")
 public class ProductoOtaku {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(description = "Identificador único del producto", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
+    @Id //Da al id el estatus de clave primaria por JPA
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//Permite que la base de datos genere un id automatico
+    @Schema(description = "Identificador único del producto", example = "1", accessMode = Schema.AccessMode.READ_ONLY) //Esto hace que solo se pueda leer y no modificar desde Swagger
     private Long id;
     @NotBlank(message = "El nombre es obligatorio")
     @Schema(description = "Nombre del producto. Este campo es obligatorio", example = "Figura de Goku")
@@ -31,11 +31,10 @@ public class ProductoOtaku {
     @Schema(description = "Cantidad disponible en stock", example = "10")
     private Integer stock;
 
-    // Constructor vacío (necesario para JPA)
+    //JPA necesita que las entidades tengan un constructor vacio
     public ProductoOtaku() {
     }
 
-    // Constructor con parámetros
     public ProductoOtaku(Long id, String nombre, String categoria, Double precio, Integer stock) {
         this.id = id;
         this.nombre = nombre;

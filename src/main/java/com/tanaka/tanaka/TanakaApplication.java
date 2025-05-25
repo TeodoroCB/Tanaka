@@ -5,12 +5,12 @@ import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-@OpenAPIDefinition(
+@SpringBootApplication //Necesario para iniciar una aplicacion spring boot
+@OpenAPIDefinition( //Documentacion Swagger
         info = @Info(
-                title = "Inventario Otaku API",
+                title = "Inventario Tanaka",
                 version = "3.0",
-                description = "API para gestionar el inventario de productos de Maestro Tanaka"
+                description = "Gestion de inventario en tienda especializada en manga"
         )
 )
 public class TanakaApplication {
