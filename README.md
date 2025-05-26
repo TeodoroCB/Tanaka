@@ -32,7 +32,7 @@ Utiliza validaciones automáticas y documentación generada mediante Swagger e i
  
   ---
 
-## Enlaces útiles
+## Enlaces
 
 > Accesibles cuando la aplicación está corriendo localmente (`localhost:8080`):
 
@@ -55,5 +55,5 @@ Toda la interacción se puede realizar directamente desde la interfaz web integr
 
 Pasos para probar:
 
-1. Asegúrate de ejecutar la aplicación (`mvn spring-boot:run` o desde tu IDE).
-2. Abre el archivo `index.html` desde:
+1. Asegúrate de ejecutar la aplicación (`./mvnw spring-boot:run` o desde tu IDE).
+2. Abre el archivo `index.html` desde: src\main\resources\static\index.html
