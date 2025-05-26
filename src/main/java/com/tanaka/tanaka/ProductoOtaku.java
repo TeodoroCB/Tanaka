@@ -17,14 +17,14 @@ public class ProductoOtaku {
     @Schema(description = "Identificador único del producto", example = "1", accessMode = Schema.AccessMode.READ_ONLY) //Esto hace que solo se pueda leer y no modificar desde Swagger
     private Long id;
     @NotBlank(message = "El nombre es obligatorio")
-    @Schema(description = "Nombre del producto. Este campo es obligatorio", example = "Figura de Goku")
+    @Schema(description = "Nombre del producto. Este campo es obligatorio", example = "Figura de Ace")
     private String nombre;
     @NotNull(message = "la categoria es obligatoria")
     @Schema(description = "Categoría a la que pertenece el producto", example = "Figura")
     private String categoria;
     @NotNull(message = "El precio es obligatorio")
     @Positive(message = "El precio debe ser positivo")
-    @Schema(description = "Precio del producto, debe ser un número positivo", example = "25.99")
+    @Schema(description = "Precio del producto, debe ser un número positivo", example = "300.99")
     private Double precio;
     @NotNull(message = "Debes tener al menos una unidad")
     @Positive(message = "Debes tener al menos una unidad")
