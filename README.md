@@ -32,13 +32,28 @@ Utiliza validaciones automáticas y documentación generada mediante Swagger e i
  
   ---
 
+## Enlaces útiles
+
+> Accesibles cuando la aplicación está corriendo localmente (`localhost:8080`):
+
+- **Interfaz de usuario (HTML)**: [http://localhost:8080/](http://localhost:8080/)
+- **API REST (JSON)**: [http://localhost:8080/productos](http://localhost:8080/productos)
+- **Documentación Swagger**: [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
+- **Consola H2**: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+
+> ️Para acceder a la consola H2:
+> - JDBC URL: `jdbc:h2:mem:testdb`
+> - Usuario: `sa`
+> - Contraseña: *(vacía)*
+
+---
+
 ## Cómo probar la aplicación
 
-Una vez que la aplicación está en funcionamiento, no es necesario utilizar herramientas externas para probar la API. Toda la interacción se puede realizar directamente desde la interfaz web integrada, ya que esta ya está conectada con los endpoints del backend, lo que elimina la necesidad de configuraciones manuales adicionales.
-- Abre el archivo: src/main/resources/static/index.html
-- Agregar productos llenando el formulario y haciendo clic en "Añadir"
-- Editar un producto usando el botón "Editar" en la tabla
-- Eliminar productos haciendo clic en "Eliminar"
-  
+Una vez que la aplicación está en funcionamiento, no es necesario utilizar herramientas externas para probar la API.  
+Toda la interacción se puede realizar directamente desde la interfaz web integrada, ya que esta ya está conectada con los endpoints del backend.
 
- ---
+Pasos para probar:
+
+1. Asegúrate de ejecutar la aplicación (`mvn spring-boot:run` o desde tu IDE).
+2. Abre el archivo `index.html` desde:
